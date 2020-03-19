@@ -1,0 +1,88 @@
+#hero-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-width: 100vw;
+  text-align: center;
+}
+
+#hero-foreground {
+  padding: 32px;
+  background-color: var(--color-container-background);
+}
+
+#logo {
+  margin-bottom: -50px;
+}
+
+.site-map {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none inside;
+}
+
+a {
+  position: relative;
+  margin: 0 16px;
+}
+
+a::before,
+a::after {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  font-family: 'Font Awesome 5 Duotone';
+  font-weight: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s linear, left 0.2s ease-out, right 0.2s ease-out;
+  line-height: 1.2;
+}
+
+a::before {
+  content: '\f0a9';
+  left: -40px;
+}
+
+a::after {
+  content: '\f0a8';
+  right: -40px;
+}
+
+a:hover::before,
+a:hover::after {
+  opacity: 1;
+}
+
+a:hover::before {
+  left: -18px;
+}
+
+a:hover::after {
+  right: -18px;
+}
+
+a .icon {
+  pointer-events: none;
+  position: absolute;
+  bottom: -48px;
+  left: calc(50% - 16px);
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.2s linear, bottom 0.2s ease-out;
+}
+
+a:hover .icon {
+  bottom: -24px;
+  opacity: 1;
+}
