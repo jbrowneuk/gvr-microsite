@@ -1,1 +1,34 @@
-<!-- TODO -->
+<header id="toolbar" class="shadowed">
+  <div id="nav-container" class="wrapper">
+    <a id="home-image" routerLink="/">
+      <img
+        id="logo"
+        src="{{ rootPath }}assets/images/logo.png"
+        alt="Guelder Valley"
+      />
+    </a>
+    <label id="menu-toggle" [class.opened]="menuBox.checked">
+      <input type="checkbox" id="menu-box" (change)="(true)" #menuBox />
+      <span>Menu</span>
+      <i
+        class="fad fa-fw"
+        [class.fa-bars]="!menuBox.checked"
+        [class.fa-times]="menuBox.checked"
+        aria-label="Toggle menu"
+      ></i>
+    </label>
+    <nav
+      id="menu-container"
+      [class.opened]="menuBox.checked"
+      (click)="menuBox.checked = false"
+    >
+      <a routerLink="/layout" routerLinkActive="active">layout</a>
+      <a routerLink="/parts" routerLinkActive="active">parts</a>
+      <a routerLink="/journal" routerLinkActive="active">updates</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrapper">
+  <router-outlet></router-outlet>
+</main>

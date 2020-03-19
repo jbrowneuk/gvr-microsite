@@ -1,3 +1,6 @@
+/* ----------------------------------------------------- *
+ * Global elements
+ * ----------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -6,6 +9,9 @@
 
 body {
   box-sizing: border-box;
+  font-family: Geomanist, sans-serif;
+  background-color: var(--color-default-background);
+  color: var(--color-default-foreground);
   font-size: 18px;
   line-height: 1.5;
   margin: 0;
@@ -14,8 +20,83 @@ body {
   overflow: auto;
 }
 
+::selection,
+::-moz-selection {
+  background: var(--color-selection-background);
+}
+
+a {
+  color: var(--color-link-foreground);
+}
+
+a:hover {
+  color: var(--color-link-hover-foreground);
+}
+
+h1,
+h2,
+h3 {
+  position: relative;
+  font-weight: normal;
+  text-shadow: 0 2px 1px var(--color-default-shadow);
+}
+
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: 1.75em;
+  }
+}
+
+hr {
+  margin: 0 auto;
+  height: 1px;
+  border: none;
+  background-color: var(--color-container-border);
+}
+
+/* ----------------------------------------------------- *
+ * Helper classes
+ * ----------------------------------------------------- */
+.wrapper {
+  width: 80%;
+  min-width: 400px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: black none no-repeat center / cover;
+  z-index: -1;
+}
+
+.rounded {
+  border-radius: 4px;
+}
+
+.shadowed {
+  box-shadow: 0 2px 4px var(--color-default-shadow);
+}
+
 .centred-text {
   text-align: center;
+}
+
+.secondary-text {
+  color: var(--color-secondary-foreground);
 }
 
 img.responsive {
