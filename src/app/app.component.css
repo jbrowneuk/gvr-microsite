@@ -19,12 +19,12 @@
 
 #nav-container,
 #menu-toggle,
-#top {
+#menu-container {
   height: 100%;
 }
 
 #nav-container,
-#top {
+#menu-container {
   display: flex;
   justify-content: stretch;
 }
@@ -53,11 +53,11 @@
   width: 0;
 }
 
-#top {
+#menu-container {
   justify-content: flex-end;
 }
 
-#top a {
+#menu-container a {
   position: relative;
   display: flex;
   align-items: center;
@@ -67,21 +67,21 @@
   transition: color 0.2s;
 }
 
-#top a::before,
-#top a::after {
+#menu-container a::before,
+#menu-container a::after {
   position: absolute;
   display: block;
   bottom: 0;
   content: '';
 }
 
-#top a::before {
+#menu-container a::before {
   left: calc(50% - 8px);
   border: 8px solid transparent;
   transition: border-bottom-color 0.2s, bottom 0.2s;
 }
 
-#top a::after {
+#menu-container a::after {
   left: 0;
   right: 0;
   height: 0;
@@ -90,17 +90,17 @@
   transition: background-color 0.2s, height 0.2s;
 }
 
-#top a.active,
-#top a:hover {
+#menu-container a.active,
+#menu-container a:hover {
   color: var(--color-light-foreground);
 }
 
-#top a.active::before {
+#menu-container a.active::before {
   bottom: 6px;
   border-bottom-color: var(--color-default-background);
 }
 
-#top a.active::after {
+#menu-container a.active::after {
   height: 6px;
   background-color: var(--color-default-background);
 }
@@ -133,7 +133,7 @@ main {
     display: flex;
   }
 
-  #top {
+  #menu-container {
     display: none;
     position: absolute;
     left: 0;
@@ -144,16 +144,16 @@ main {
     backdrop-filter: blur(15px);
   }
 
-  #top.opened {
+  #menu-container.opened {
     display: block;
     box-shadow: 0 2px 4px var(--color-default-shadow);
   }
 
-  #top a {
+  #menu-container a {
     height: var(--toolbar-height);
   }
 
-  #top a.active {
+  #menu-container a.active {
     background-color: rgba(255, 255, 255, 0.25);
   }
 }
