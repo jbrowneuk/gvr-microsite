@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
+import { PageObjectBase } from './lib/testing/page-object.base';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -40,23 +41,17 @@ describe('AppComponent', () => {
   });
 });
 
-class AppComponentPageObject {
-  constructor(private fixture: ComponentFixture<AppComponent>) {}
-
-  private get nativeElement(): HTMLElement {
-    return this.fixture.nativeElement;
-  }
-
+class AppComponentPageObject extends PageObjectBase<AppComponent> {
   public get menuToggleElement(): HTMLLabelElement {
-    return this.nativeElement.querySelector('#menu-toggle');
+    return this.select('#menu-toggle');
   }
 
   public get menuControlElement(): HTMLInputElement {
-    return this.nativeElement.querySelector('#menu-box');
+    return this.select('#menu-box');
   }
 
   public get menuContainer(): HTMLInputElement {
-    return this.nativeElement.querySelector('#menu-container');
+    return this.select('#menu-container');
   }
 
   public get menuShown(): boolean {
