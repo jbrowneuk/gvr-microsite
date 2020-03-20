@@ -1,4 +1,4 @@
-import { ROOT_PATH } from 'src/variables';
+import { ROOT_PATH } from 'src/app/variables';
 
 export const environment = {
   production: true
