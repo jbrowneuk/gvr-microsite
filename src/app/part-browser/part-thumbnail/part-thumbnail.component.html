@@ -1,0 +1,44 @@
+<a *ngIf="part" class="item" routerLink="./{{ part.id }}">
+  <div data-image-area class="image-area">
+    <img
+      *ngIf="part.image && part.image.length > 0; else noImage"
+      src="{{ rootPath }}assets/images/thumbs/{{ part.image }}"
+      data-image
+      alt="{{ part.name }}"
+    />
+    <div
+      *ngIf="!part.image || part.image.length === 0"
+      data-no-image
+      class="no-img"
+    >
+      <i class="fad fa-ban fa-2x" aria-hidden="true"></i>
+      <div>No image</div>
+    </div>
+    <div
+      *ngIf="part.data && part.data.inStorage"
+      data-storage-overlay
+      class="storage-overlay"
+    >
+      <span class="notification">
+        <i class="fad fa-archive" aria-hidden="true"></i>
+        In Storage
+      </span>
+    </div>
+  </div>
+
+  <div class="summary-area">
+    <div class="info">
+      <div data-manufacturer class="manufacturer">
+        {{ part.manufacturer }} {{ part.id }}
+      </div>
+      <div data-item-count class="count">×{{ part.acquired }}</div>
+    </div>
+    <div data-title class="title">{{ part.name }}</div>
+  </div>
+</a>
+
+<ng-template #noImage>
+  <svg viewBox="0 0 200 150">
+    <use xlink:href="#loading-area-hitbox"></use>
+  </svg>
+</ng-template>

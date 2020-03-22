@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { PartSummaryComponent } from './part-summary/part-summary.component';
+import { PartThumbnailComponent } from './part-thumbnail/part-thumbnail.component';
 import { PartBrowserEffects } from './state/part-browser.effects';
 import { partBrowserReducer } from './state/part-browser.reducer';
 import { partBrowserFeatureName } from './state/part-browser.selectors';
@@ -12,7 +13,7 @@ import { partBrowserFeatureName } from './state/part-browser.selectors';
 const routes: Routes = [{ path: 'parts', component: PartSummaryComponent }];
 
 @NgModule({
-  declarations: [PartSummaryComponent],
+  declarations: [PartSummaryComponent, PartThumbnailComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature(partBrowserFeatureName, partBrowserReducer),
