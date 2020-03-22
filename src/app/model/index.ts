@@ -17,7 +17,7 @@ export interface Part {
 export interface PartCategory {
   name: string;
   id: string;
-  icon?: string;
+  icon: string;
   parts: Part[];
 }
 

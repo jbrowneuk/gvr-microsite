@@ -1,0 +1,22 @@
+{
+  "lastUpdate": "2020-03-22T00:07Z",
+  "categories": [
+    {
+      "name": "Category Name",
+      "id": "demo",
+      "icon": "box",
+      "parts": [
+        {
+          "id": "AB123",
+          "manufacturer": "Widgets-R-Us",
+          "name": "Widget",
+          "image": "widget.png",
+          "retailCost": 50,
+          "actualCost": 45,
+          "required": 40,
+          "acquired": 3
+        }
+      ]
+    }
+  ]
+}

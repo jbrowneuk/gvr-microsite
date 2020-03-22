@@ -1,0 +1,121 @@
+<ng-container
+  *ngIf="costSummary$ | async as costSummary; else summaryLoadState"
+>
+  <h1>Parts list</h1>
+  <p>
+    The Guelder Valley layout is made out of {{ costSummary.totalItems }} parts
+    that I’ve sorted into {{ costSummary.categories.length }} groups. Choose a
+    group below to see photos and more details.
+  </p>
+  <p class="tip">
+    <i class="icon fad fa-fw fa-info-square" aria-hidden="true"></i>
+    Alternatively, you can jump straight to the
+    <a routerLink="./locomotives">locomotives</a>,
+    <a routerLink="./coaches">coaches</a> or
+    <a routerLink="./wagons">wagons</a> sections for a summary of the trains
+    running on the layout.
+  </p>
+
+  <table class="table hoverable cost-summary">
+    <caption>
+      Parts summary
+      <span *ngIf="costsVisible">and estimated costs</span
+      ><br />
+      Last updated
+      <time data-last-updated [attr.datetime]="lastUpdated">
+        {{ lastUpdated | date }}
+      </time>
+    </caption>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Items</th>
+        <th *ngIf="costsVisible" data-cost-header>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let category of costSummary.categories"
+        routerLink="/parts/{{ category.id }}"
+        [attr.data-summary-row]="category.id"
+      >
+        <td class="text">
+          <i
+            *ngIf="category.icon"
+            class="fad fa-fw fa-{{ category.icon }} category-icon"
+            aria-hidden="true"
+          ></i>
+          <a routerLink="/parts/{{ category.id }}" data-name>{{
+            category.name
+          }}</a>
+        </td>
+        <td data-item-count class="number">{{ category.items }}</td>
+        <td *ngIf="costsVisible" data-estimated-cost class="cost">
+          {{ category.cost.toFixed(2) }}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr data-totals-row>
+        <th scope="row">Total</th>
+        <td data-item-count class="number">{{ costSummary.totalItems }}</td>
+        <td *ngIf="costsVisible" data-estimated-cost class="cost">
+          {{ costSummary.totalCost.toFixed(2) }}
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <h2>Estimated cost</h2>
+  <p>
+    I’m keeping track (pun not originally intended) of the estimated cost of the
+    layout while building it – these values are currently
+    <button (click)="costsVisible = !costsVisible" data-summary-view-toggle>
+      <i
+        class="icon fad fa-fw"
+        [class.fa-eye]="costsVisible"
+        [class.fa-eye-slash]="!costsVisible"
+        aria-hidden="true"
+      ></i>
+      <ng-container *ngIf="costsVisible">
+        shown
+      </ng-container>
+      <ng-container *ngIf="!costsVisible">
+        hidden
+      </ng-container>
+    </button>
+  </p>
+  <p>
+    The estimated cost is simply a loose guideline to understand which elements
+    have cost the most and is <em>not intended</em> to act as a reference for
+    the price of the layout. Since it is still being built, it is very likely
+    these numbers will likely change!
+  </p>
+  <p>
+    Costs are calculated using the price I paid for an item or the retail price.
+    If neither of these are known, the average price on second-hand sites is
+    used.
+  </p>
+  <p>
+    Some items have unknown prices as they were bought over 20 years ago. They
+    may require further research to convert their prices to modern day
+    equivalents.
+  </p>
+</ng-container>
+
+<ng-template #summaryLoadState>
+  <ng-container *ngIf="loading$ | async; else noItems">
+    <h1 class="shimmer">Loading…</h1>
+    <p class="shimmer paragraph"></p>
+    <div class="shimmer caption"></div>
+    <div class="shimmer cost-summary"></div>
+    <p class="shimmer paragraph"></p>
+  </ng-container>
+</ng-template>
+
+<ng-template #noItems>
+  <div>
+    There was an error loading the parts summary. Please check your internet
+    connection and try again.
+  </div>
+</ng-template>

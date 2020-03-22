@@ -21,6 +21,7 @@
             "aot": true,
             "assets": [
               "src/assets",
+              "src/parts-list.json",
               {
                 "glob": "**/*.css",
                 "input": "node_modules/normalize.css/",
