@@ -183,3 +183,54 @@ img.responsive {
     background-position: -100% center;
   }
 }
+
+/* ----------------------------------------------------- *
+ * Page header
+ * ----------------------------------------------------- */
+.header-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 450px) {
+  .header-area {
+    flex-direction: column;
+  }
+}
+
+/* ----------------------------------------------------- *
+ * Full-width button
+ * ----------------------------------------------------- */
+.big-button {
+  display: block;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  background-color: var(--color-notification-background);
+  border-radius: 4px;
+  text-decoration: none;
+  box-shadow: 0 2px 4px var(--color-default-shadow);
+  transition: box-shadow 0.2s;
+}
+
+.big-button:hover {
+  box-shadow: 0 8px 10px var(--color-default-shadow);
+}
+
+/* ----------------------------------------------------- *
+ * Full-width callout
+ * ----------------------------------------------------- */
+.tip {
+  position: relative;
+  background-color: var(--color-container-background);
+  border: 1px solid var(--color-default-border);
+  border-radius: 4px;
+  padding-left: 32px;
+  padding-right: 4px;
+}
+
+.tip .icon {
+  position: absolute;
+  left: 4px;
+  top: 5px;
+}

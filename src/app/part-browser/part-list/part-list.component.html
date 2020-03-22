@@ -1,0 +1,52 @@
+<a routerLink=".." class="big-button">
+  <i class="fad fa-fw fa-chevron-left" aria-hidden="true"></i>
+  Return to parts summary
+</a>
+
+<svg id="part-spritesheet">
+  <symbol id="loading-area-hitbox" viewBox="0 0 200 150">
+    <rect width="200" height="150" rx="2" id="faux-blank" />
+  </symbol>
+</svg>
+
+<ng-container
+  *ngIf="category$ | async as selectedCategory; else categoryLoadState"
+>
+  <div class="header-area">
+    <h1 data-name>
+      <i
+        *ngIf="selectedCategory.icon"
+        class="fad fa-fw fa-{{ selectedCategory.icon }} category-icon"
+        aria-hidden="true"
+        data-icon
+      ></i>
+      {{ selectedCategory.name }}
+    </h1>
+    <div *ngIf="lastUpdated" data-last-update class="secondary-text info-text">
+      Parts list last updated on {{ lastUpdated | date }}
+    </div>
+  </div>
+  <div data-items id="item-grid">
+    <gvr-part-thumbnail
+      *ngFor="let part of selectedCategory.parts"
+      [part]="part"
+      [rootPath]="rootPath"
+    ></gvr-part-thumbnail>
+  </div>
+</ng-container>
+
+<ng-template #categoryLoadState>
+  <div *ngIf="loading$ | async; else noCategory" data-loading class="skeleton">
+    <div class="header-area">
+      <h1 class="shimmer">Loading…</h1>
+      <div class="shimmer info-text"></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noCategory>
+  <div data-no-category>
+    There’s no category with this id.
+    <a routerLink="..">Go back to the part summary?</a>
+  </div>
+</ng-template>

@@ -156,7 +156,7 @@ describe('Part Summary Component', () => {
   describe('Summary table — default view', () => {
     it('should display last updated date', () => {
       expect(pageObject.lastUpdated).toBeTruthy();
-      const currentLocale = TestBed.get(LOCALE_ID);
+      const currentLocale = TestBed.inject(LOCALE_ID);
       const expectedDate = formatDate(
         mockPartList.lastUpdate,
         'mediumDate',
