@@ -2,6 +2,7 @@ import { PageObjectBase } from 'src/app/lib/testing/page-object.base';
 import { Part } from 'src/app/model';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PartThumbnailComponent } from './part-thumbnail.component';
 
@@ -29,7 +30,8 @@ describe('PartThumbnailComponent', () => {
 
   beforeEach(async(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PartThumbnailComponent]
+      declarations: [PartThumbnailComponent],
+      imports: [RouterTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PartThumbnailComponent);
