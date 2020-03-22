@@ -103,3 +103,83 @@ img.responsive {
   max-width: 100%;
   height: auto;
 }
+
+/* ----------------------------------------------------- *
+ * HTML table element styling
+ * ----------------------------------------------------- */
+.table {
+  margin-top: 0.25em;
+  margin-bottom: 1em;
+  border-collapse: collapse;
+  border: 1px solid var(--color-container-border);
+  background: var(--color-table-row-background);
+}
+
+.table thead {
+  border-bottom: 2px solid var(--color-container-border);
+}
+
+.table tfoot {
+  border-top: 2px solid var(--color-container-border);
+}
+
+.table th,
+.table td {
+  padding: 0.5em 1em;
+}
+
+.table .number,
+.table .cost {
+  text-align: right;
+}
+
+.table .cost::before {
+  content: '£';
+  display: inline;
+  /* Remove gap caused by white space */
+  margin-right: -0.2em;
+}
+
+.table tr:nth-child(even) {
+  background: var(--color-table-row-background-alt);
+}
+
+.table.hoverable tbody tr {
+  transition: background-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.table.hoverable tbody tr:hover {
+  background-color: var(--color-link-foreground);
+  color: var(--color-light-foreground);
+}
+
+.table.hoverable tbody tr:hover a {
+  color: inherit;
+}
+
+/* ----------------------------------------------------- *
+ * Loading shimmer
+ * ----------------------------------------------------- */
+.shimmer {
+  background: var(--color-loader-skeleton-primary)
+    linear-gradient(
+      to right,
+      var(--color-loader-skeleton-secondary) 0%,
+      var(--color-loader-skeleton-primary) 50%,
+      var(--color-loader-skeleton-secondary) 100%
+    );
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: shimmer 1s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% center;
+  }
+
+  to {
+    background-position: -100% center;
+  }
+}
