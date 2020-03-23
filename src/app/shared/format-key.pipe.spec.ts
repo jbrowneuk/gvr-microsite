@@ -15,4 +15,13 @@ describe('Format Key Pipe', () => {
 
     expect(convertedKey).toBe('A Long String Which Reads Like A Sentence');
   });
+
+  it('should convert single word key to Capitalised case', () => {
+    const pairs = [{ key: 'acquired', value: '' }];
+
+    const actualValues = pipe.transform(pairs);
+    const convertedKey = actualValues[0].key;
+
+    expect(convertedKey).toBe('Acquired');
+  });
 });

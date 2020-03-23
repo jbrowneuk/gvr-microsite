@@ -3,7 +3,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { KeyValuePair } from '../model';
 
 function formatCamelCase(input: string) {
-  return input.replace(/([A-Z])/g, ' $1').substring(1);
+  return input
+    .replace(/([A-Z])/g, ' $1')
+    .trim()
+    .replace(/^./, m => m.toUpperCase());
 }
 
 @Pipe({
