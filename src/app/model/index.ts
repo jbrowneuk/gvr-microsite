@@ -25,3 +25,8 @@ export interface PartList {
   lastUpdate: string;
   categories: PartCategory[];
 }
+
+export interface KeyValuePair {
+  key: string;
+  value: any;
+}
