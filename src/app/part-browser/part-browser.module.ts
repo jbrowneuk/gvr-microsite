@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { SharedModule } from '../shared/shared.module';
+import { PartDetailComponent } from './part-detail/part-detail.component';
 import { PartListComponent } from './part-list/part-list.component';
 import { PartSummaryComponent } from './part-summary/part-summary.component';
 import { PartThumbnailComponent } from './part-thumbnail/part-thumbnail.component';
@@ -13,20 +15,23 @@ import { partBrowserFeatureName } from './state/part-browser.selectors';
 
 const routes: Routes = [
   { path: 'parts', component: PartSummaryComponent },
-  { path: 'parts/:category', component: PartListComponent }
+  { path: 'parts/:category', component: PartListComponent },
+  { path: 'parts/:category/:id', component: PartDetailComponent }
 ];
 
 @NgModule({
   declarations: [
     PartSummaryComponent,
     PartThumbnailComponent,
-    PartListComponent
+    PartListComponent,
+    PartDetailComponent
   ],
   imports: [
     CommonModule,
     StoreModule.forFeature(partBrowserFeatureName, partBrowserReducer),
     EffectsModule.forFeature([PartBrowserEffects]),
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ]
 })
 export class PartBrowserModule {}

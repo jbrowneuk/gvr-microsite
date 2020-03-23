@@ -1,0 +1,77 @@
+<a routerLink=".." class="big-button">
+  <i class="fad fa-fw fa-chevron-left" aria-hidden="true"></i>
+  Return to parts list
+</a>
+
+<ng-container *ngIf="part$ | async as part; else categoryLoadState">
+  <div data-part-identifier class="manufacturer secondary-text">
+    {{ part.manufacturer }} {{ part.id }}
+  </div>
+  <h1 data-name>{{ part.name }}</h1>
+
+  <div class="image-area centred-text">
+    <img
+      *ngIf="part.image && part.image.length > 0; else noImage"
+      src="{{ rootPath }}assets/images/parts/{{ part.image }}"
+      class="responsive shadowed rounded"
+      alt="{{ part.name }}"
+      data-image
+    />
+  </div>
+
+  <h2>Notes</h2>
+  <gvr-formatted-text
+    *ngIf="part.data && part.data.notes; else blankNotes"
+    data-description
+  >
+    {{ part.data.notes }}
+  </gvr-formatted-text>
+
+  <h2>Data</h2>
+
+  <table
+    class="table properties"
+    *ngIf="part | dataExtraction | dataFilter: filteredKeys | formatKey as rows"
+    data-part-details
+  >
+    <caption>
+      Model information
+    </caption>
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody data-properties>
+      <tr *ngFor="let row of rows">
+        <td>{{ row.key }}</td>
+        <td class="{{ row | tableClass }}">{{ row | formatValue }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-template #noImage>
+  <div class="no-img" data-no-image>
+    <i class="fad fa-ban fa-2x" aria-hidden="true"></i>
+    <div>No image</div>
+  </div>
+</ng-template>
+
+<ng-template #blankNotes>
+  <p data-no-description>No notes for this item.</p>
+</ng-template>
+
+<ng-template #categoryLoadState>
+  <div *ngIf="loading$ | async; else noCategory">
+    Loading!
+  </div>
+</ng-template>
+
+<ng-template #noCategory>
+  <div>
+    There’s no part with this id.
+    <a routerLink="..">Go back to the part list?</a>
+  </div>
+</ng-template>
