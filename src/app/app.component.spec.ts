@@ -23,10 +23,6 @@ describe('AppComponent', () => {
       });
   }));
 
-  it('should create the app', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should show and hide menu when toggled', done => {
     expect(pageObject.menuShown).toBeFalse();
 
@@ -38,6 +34,21 @@ describe('AppComponent', () => {
       expect(pageObject.menuShown).toBeTrue();
       done();
     });
+  });
+
+  it('should provide component as route transition state', () => {
+    class DummyComponent {}
+
+    const mockOutlet = {
+      isActivated: true,
+      activatedRoute: {
+        component: DummyComponent
+      }
+    };
+
+    const actual = component.prepareRouteTransition(mockOutlet as any);
+
+    expect(actual).toBe(DummyComponent.toString());
   });
 });
 
