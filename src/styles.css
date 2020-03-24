@@ -128,16 +128,8 @@ img.responsive {
   padding: 0.5em 1em;
 }
 
-.table .number,
-.table .cost {
+.table .number {
   text-align: right;
-}
-
-.table .cost::before {
-  content: '£';
-  display: inline;
-  /* Remove gap caused by white space */
-  margin-right: -0.2em;
 }
 
 .table tr:nth-child(even) {
