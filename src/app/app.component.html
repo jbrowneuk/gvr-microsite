@@ -29,6 +29,11 @@
   </div>
 </header>
 
-<main class="wrapper">
-  <router-outlet></router-outlet>
+<main class="wrapper" [@routeTransition]="prepareRouteTransition(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
 </main>
+
+<footer id="page-footer">
+  <p>&copy;2020 <a href="/">Jason Browne</a></p>
+  <p>built with ❤️ using <a href="//angular.io">Angular</a></p>
+</footer>
