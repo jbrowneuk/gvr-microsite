@@ -15,11 +15,6 @@ describe('Format Value Pipe', () => {
     expect(convertedFalse).toBe('No');
   });
 
-  it('should convert to numeric format with 2dp for pair with ‘cost‘ in the key', () => {
-    const converted = pipe.transform({ key: 'someCost', value: 16 });
-    expect(converted).toBe('16.00');
-  });
-
   it('should convert number to string representation', () => {
     const value = 128;
     const converted = pipe.transform({ key: '', value });

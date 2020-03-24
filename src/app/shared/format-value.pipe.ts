@@ -11,10 +11,6 @@ export class FormatValuePipe implements PipeTransform {
       return value.value ? 'Yes' : 'No';
     }
 
-    if (value.key.toLowerCase().includes('cost')) {
-      return (+value.value).toFixed(2);
-    }
-
     return `${value.value}`;
   }
 }

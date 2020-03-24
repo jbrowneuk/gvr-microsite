@@ -46,7 +46,14 @@
     <tbody data-properties>
       <tr *ngFor="let row of rows">
         <td>{{ row.key }}</td>
-        <td class="{{ row | tableClass }}">{{ row | formatValue }}</td>
+        <td class="{{ row | tableClass }}">
+          <ng-container *ngIf="isCost(row)">
+            {{ row.value | currency }}
+          </ng-container>
+          <ng-container *ngIf="!isCost(row)">
+            {{ row | formatValue }}
+          </ng-container>
+        </td>
       </tr>
     </tbody>
   </table>

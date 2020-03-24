@@ -20,12 +20,4 @@ describe('Table Class Pipe', () => {
       expect(actualValue).toBe(typeof pair.value);
     });
   });
-
-  it('should return ‘cost’ for pair with ‘cost‘ in the key', () => {
-    const pair = { key: 'someCost', value: 0 };
-
-    const actualValue = pipe.transform(pair);
-
-    expect(actualValue).toBe('cost');
-  });
 });
