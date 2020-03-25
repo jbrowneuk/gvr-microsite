@@ -12,10 +12,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
+import { LayoutComponent } from './layout/layout.component';
 import { PartBrowserModule } from './part-browser/part-browser.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ErrorComponent],
+  declarations: [AppComponent, HomeComponent, ErrorComponent, LayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
