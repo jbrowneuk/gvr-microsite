@@ -7,10 +7,6 @@ import { KeyValuePair } from '../model';
 })
 export class TableClassPipe implements PipeTransform {
   transform(value: KeyValuePair): string {
-    if (value.key.toLowerCase().includes('cost')) {
-      return 'cost';
-    }
-
     return typeof value.value;
   }
 }

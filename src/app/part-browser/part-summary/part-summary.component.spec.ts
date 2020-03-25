@@ -3,8 +3,8 @@ import { PageObjectBase } from 'src/app/lib/testing/page-object.base';
 import { Part, PartList } from 'src/app/model';
 import { IMock, Mock, Times } from 'typemoq';
 
-import { formatDate } from '@angular/common';
-import { LOCALE_ID } from '@angular/core';
+import { formatDate, getCurrencySymbol } from '@angular/common';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -70,6 +70,7 @@ describe('Part Summary Component', () => {
   let mockFaçade: IMock<PartBrowserFacade>;
   let totalItemCount: number;
   let estimatedItemCost: number;
+  let currentLocale: string;
 
   beforeAll(() => {
     totalItemCount =
@@ -95,15 +96,12 @@ describe('Part Summary Component', () => {
       imports: [RouterTestingModule]
     }).compileComponents();
 
+    currentLocale = TestBed.inject(LOCALE_ID);
     fixture = TestBed.createComponent(PartSummaryComponent);
     pageObject = new PartSummaryPageObject(fixture);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 
   it('should request part list on creation', () => {
     mockFaçade.verify(f => f.loadPartList(), Times.once());
@@ -156,7 +154,6 @@ describe('Part Summary Component', () => {
   describe('Summary table — default view', () => {
     it('should display last updated date', () => {
       expect(pageObject.lastUpdated).toBeTruthy();
-      const currentLocale = TestBed.inject(LOCALE_ID);
       const expectedDate = formatDate(
         mockPartList.lastUpdate,
         'mediumDate',
@@ -190,7 +187,11 @@ describe('Part Summary Component', () => {
   });
 
   describe('Summary table — full view', () => {
+    let currencySymbol: string;
+
     beforeEach(() => {
+      const currencyCode = TestBed.inject(DEFAULT_CURRENCY_CODE);
+      currencySymbol = getCurrencySymbol(currencyCode, 'narrow', currentLocale);
       component.costsVisible = true;
       fixture.detectChanges();
     });
@@ -213,14 +214,14 @@ describe('Part Summary Component', () => {
           Selectors.estimatedCostCell
         );
         expect(countElement.textContent.trim()).toBe(
-          `${estimatedCost.toFixed(2)}`
+          `${currencySymbol}${estimatedCost.toFixed(2)}`
         );
       });
     });
 
     it('should display estimated item cost in currency format', () => {
       expect(pageObject.estimatedItemCost.textContent.trim()).toBe(
-        `${estimatedItemCost.toFixed(2)}`
+        `${currencySymbol}${estimatedItemCost.toFixed(2)}`
       );
     });
 

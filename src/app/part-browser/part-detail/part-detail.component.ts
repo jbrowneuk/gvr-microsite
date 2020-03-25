@@ -1,6 +1,6 @@
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Part } from 'src/app/model';
+import { KeyValuePair, Part } from 'src/app/model';
 import { ROOT_PATH } from 'src/app/variables';
 
 import { Component, Inject, OnInit, Optional } from '@angular/core';
@@ -57,5 +57,9 @@ export class PartDetailComponent implements OnInit {
         return relatedCategory.parts.find(p => p.id === specifiedId);
       })
     );
+  }
+
+  public isCost(rowData: KeyValuePair): boolean {
+    return rowData.key.toUpperCase().includes('COST');
   }
 }

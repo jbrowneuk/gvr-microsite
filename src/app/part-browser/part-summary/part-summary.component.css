@@ -7,15 +7,6 @@
   margin-right: 0.25em;
 }
 
-.clicker {
-  cursor: pointer;
-}
-
-.clicker .link {
-  text-decoration: underline;
-  color: var(--color-link-foreground);
-}
-
 tbody td:first-child,
 tbody td:last-child {
   position: relative;

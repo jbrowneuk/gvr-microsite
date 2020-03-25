@@ -50,8 +50,8 @@
           }}</a>
         </td>
         <td data-item-count class="number">{{ category.items }}</td>
-        <td *ngIf="costsVisible" data-estimated-cost class="cost">
-          {{ category.cost.toFixed(2) }}
+        <td *ngIf="costsVisible" data-estimated-cost class="number">
+          {{ category.cost | currency }}
         </td>
       </tr>
     </tbody>
@@ -59,8 +59,8 @@
       <tr data-totals-row>
         <th scope="row">Total</th>
         <td data-item-count class="number">{{ costSummary.totalItems }}</td>
-        <td *ngIf="costsVisible" data-estimated-cost class="cost">
-          {{ costSummary.totalCost.toFixed(2) }}
+        <td *ngIf="costsVisible" data-estimated-cost class="number">
+          {{ costSummary.totalCost | currency }}
         </td>
       </tr>
     </tfoot>
