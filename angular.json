@@ -19,6 +19,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "i18nLocale": "en-GB",
             "assets": [
               "src/assets",
               "src/parts-list.json",

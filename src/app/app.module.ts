@@ -1,7 +1,7 @@
 import { ENV_PROVIDERS, environment } from 'src/environments/environment';
 
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -30,7 +30,10 @@ import { PartBrowserModule } from './part-browser/part-browser.module';
     PartBrowserModule,
     AppRoutingModule
   ],
-  providers: [ENV_PROVIDERS],
+  providers: [
+    ENV_PROVIDERS,
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'GBP' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
