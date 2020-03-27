@@ -27,6 +27,6 @@ function sortWrapper(a: any, b: any, property: string) {
 })
 export class ArraySortPipe implements PipeTransform {
   transform(value: any[], sortProp: string): any[] {
-    return value.sort((a, b) => sortWrapper(a, b, sortProp));
+    return [...value].sort((a, b) => sortWrapper(a, b, sortProp));
   }
 }
