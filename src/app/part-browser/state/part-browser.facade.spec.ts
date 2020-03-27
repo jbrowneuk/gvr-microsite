@@ -1,10 +1,8 @@
 import { of } from 'rxjs';
 import { IMock, It, Mock, Times } from 'typemoq';
 
-import { TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 
-import { PartsListService } from '../parts-list.service';
 import { LoadPartList } from './part-browser.actions';
 import { PartBrowserFacade } from './part-browser.facade';
 import { getPartList, getPartListLoading } from './part-browser.selectors';
@@ -22,10 +20,10 @@ describe('Part Browser facade', () => {
   beforeEach(() => {
     mockStore = Mock.ofType<Store<PartBrowserState>>();
     mockStore
-      .setup(store => store.select(It.is(s => <any>s === getPartList)))
+      .setup(store => store.select(It.is((s: any) => s === getPartList)))
       .returns(() => of(mockPartsList));
     mockStore
-      .setup(store => store.select(It.is(s => <any>s === getPartListLoading)))
+      .setup(store => store.select(It.is((s: any) => s === getPartListLoading)))
       .returns(() => of(false));
 
     facade = new PartBrowserFacade(mockStore.object);

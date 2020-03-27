@@ -17,7 +17,7 @@ describe('PartsListService', () => {
     });
 
     service = TestBed.inject(PartsListService);
-    httpMock = TestBed.get(HttpTestingController);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
