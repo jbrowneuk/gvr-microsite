@@ -3,16 +3,19 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { SharedModule } from '../shared/shared.module';
+import { PostComponent } from './post/post.component';
 import { JournalEffects } from './state/journal.effects';
 import { journalReducer } from './state/journal.reducer';
 import { journalFeatureName } from './state/journal.selectors';
 
 @NgModule({
-  declarations: [],
+  declarations: [PostComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature(journalFeatureName, journalReducer),
-    EffectsModule.forFeature([JournalEffects])
+    EffectsModule.forFeature([JournalEffects]),
+    SharedModule
   ]
 })
 export class JournalModule {}

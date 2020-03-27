@@ -1,0 +1,39 @@
+<article *ngIf="postData; else skeleton" class="post" data-post-loaded>
+  <header class="header-area">
+    <h1 data-title>{{ postData.title }}</h1>
+    <time
+      [attr.datetime]="postData.date | unixEpoch | date: 'yyyy-MM-ddTHH:mmZ'"
+      class="date"
+      data-date
+    >
+      <span class="day" data-day>{{
+        postData.date | unixEpoch | date: 'd'
+      }}</span>
+      <span class="month" data-month-year>{{
+        postData.date | unixEpoch | date: 'MMM yyyy'
+      }}</span>
+    </time>
+  </header>
+  <gvr-formatted-text data-post-content>
+    {{ postData.content }}
+  </gvr-formatted-text>
+  <footer>
+    <ul *ngIf="postData.tags" class="tags secondary-text" data-post-tags>
+      <li><i class="fad fa-fw fa-tags" aria-hidden="true"></i></li>
+      <li *ngFor="let tag of postData.tags" [attr.data-post-tag]="tag">
+        #{{ tag }}
+      </li>
+    </ul>
+  </footer>
+</article>
+
+<ng-template #skeleton>
+  <div class="post skeleton" data-post-loading>
+    <header class="header-area">
+      <h1 class="shimmer">Loading…</h1>
+      <div class="date shimmer"><span class="month"></span></div>
+    </header>
+    <p class="shimmer paragraph"></p>
+    <div class="shimmer tags"></div>
+  </div>
+</ng-template>
