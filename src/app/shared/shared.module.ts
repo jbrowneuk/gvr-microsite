@@ -9,14 +9,16 @@ import { FormatKeyPipe } from './format-key.pipe';
 import { FormatValuePipe } from './format-value.pipe';
 import { FormattedTextComponent } from './formatted-text/formatted-text.component';
 import { TableClassPipe } from './table-class.pipe';
+import { UnixEpochPipe } from './unix-epoch.pipe';
 
 const sharedFeatures = [
   DataExtractionPipe,
   DataFilterPipe,
   FormatKeyPipe,
   FormatValuePipe,
+  FormattedTextComponent,
   TableClassPipe,
-  FormattedTextComponent
+  UnixEpochPipe
 ];
 
 @NgModule({
