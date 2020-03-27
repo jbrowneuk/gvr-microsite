@@ -4,12 +4,10 @@ import { IMock, Mock } from 'typemoq';
 
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Store } from '@ngrx/store';
 
 import { PartsListService } from '../parts-list.service';
 import { LoadPartList, LoadPartListFailure, LoadPartListSuccess } from './part-browser.actions';
 import { PartBrowserEffects } from './part-browser.effects';
-import { PartBrowserState } from './part-browser.state';
 
 describe('Part Browser effects', () => {
   const mockPartsList = {
@@ -32,7 +30,7 @@ describe('Part Browser effects', () => {
       ]
     });
 
-    effects = TestBed.get(PartBrowserEffects);
+    effects = TestBed.inject(PartBrowserEffects);
   });
 
   describe('loadParts$', () => {
