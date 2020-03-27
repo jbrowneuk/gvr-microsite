@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { RouteTransitions } from './route-transitions';
+import { ROOT_PATH } from './variables';
 
 @Component({
   selector: 'gvr-root',
@@ -10,7 +11,11 @@ import { RouteTransitions } from './route-transitions';
   animations: RouteTransitions
 })
 export class AppComponent {
-  public readonly rootPath = '/';
+  public readonly rootPath: string;
+
+  constructor(@Optional() @Inject(ROOT_PATH) rootPath: string) {
+    this.rootPath = rootPath || '/';
+  }
 
   public prepareRouteTransition(outlet: RouterOutlet): any {
     if (!outlet.isActivated) {
