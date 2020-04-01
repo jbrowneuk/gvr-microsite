@@ -6,6 +6,7 @@ import { IMock, It, Mock, Times } from 'typemoq';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PostData, PostDataWrapper, PostStatus } from '../model';
 import { JournalFacade } from '../state/journal.facade';
@@ -51,7 +52,7 @@ describe('Post List Component', () => {
         { provide: JournalFacade, useFactory: () => mockFacade.object },
         { provide: ActivatedRoute, useFactory: () => mockRoute.object }
       ],
-      imports: [SharedModule],
+      imports: [RouterTestingModule, SharedModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 

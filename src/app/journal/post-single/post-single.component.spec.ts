@@ -2,8 +2,10 @@ import { of } from 'rxjs';
 import { PageObjectBase } from 'src/app/lib/testing/page-object.base';
 import { IMock, It, Mock, Times } from 'typemoq';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PostData, PostStatus } from '../model';
 import { JournalFacade } from '../state/journal.facade';
@@ -40,7 +42,8 @@ describe('Post (Single) Component', () => {
       providers: [
         { provide: JournalFacade, useFactory: () => mockFacade.object },
         { provide: ActivatedRoute, useFactory: () => mockRoute.object }
-      ]
+      ],
+      schemas: [RouterTestingModule, CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PostSingleComponent);
