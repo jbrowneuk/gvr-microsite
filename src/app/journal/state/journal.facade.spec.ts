@@ -4,7 +4,7 @@ import { IMock, It, Mock, Times } from 'typemoq';
 import { Store } from '@ngrx/store';
 
 import { PostDataWrapper } from '../model';
-import { LoadPosts } from './journal.actions';
+import { LoadPosts, LoadSinglePost } from './journal.actions';
 import { JournalFacade } from './journal.facade';
 import { getPostList, getPostListLoading } from './journal.selectors';
 import { JournalState } from './journal.state';
@@ -35,6 +35,14 @@ describe('Journal facade', () => {
     const page = 1;
     facade.loadPostList(page);
     const action = new LoadPosts(page);
+    mockStore.verify(s => s.dispatch(It.isValue(action)), Times.once());
+    expect().nothing();
+  });
+
+  it('should dispatch load single post action', () => {
+    const slug = 'slug';
+    facade.loadPostBySlug(slug);
+    const action = new LoadSinglePost(slug);
     mockStore.verify(s => s.dispatch(It.isValue(action)), Times.once());
     expect().nothing();
   });

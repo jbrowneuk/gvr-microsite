@@ -6,7 +6,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { JournalService } from '../journal.service';
 import {
-    JournalActionsType, LoadPosts, LoadPostsFailure, LoadPostsSuccess
+    JournalActionsType, LoadPosts, LoadPostsFailure, LoadPostsSuccess, LoadSinglePost,
+    LoadSinglePostFailure, LoadSinglePostSuccess
 } from './journal.actions';
 
 @Injectable()
@@ -18,6 +19,17 @@ export class JournalEffects {
       this.service.fetchPosts(action.payload).pipe(
         map(r => new LoadPostsSuccess(r)),
         catchError(() => of(new LoadPostsFailure()))
+      )
+    )
+  );
+
+  @Effect()
+  public loadSinglePost$ = this.actions.pipe(
+    ofType(JournalActionsType.LoadSinglePost),
+    switchMap((action: LoadSinglePost) =>
+      this.service.fetchPostBySlug(action.payload).pipe(
+        map(r => new LoadSinglePostSuccess(r)),
+        catchError(() => of(new LoadSinglePostFailure()))
       )
     )
   );

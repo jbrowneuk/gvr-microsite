@@ -1,27 +1,55 @@
 import { Action } from '@ngrx/store';
 
-import { PostDataWrapper } from '../model';
+import { PostData, PostDataWrapper } from '../model';
 
 export enum JournalActionsType {
-  LoadPosts = '[Journal] Load Start',
-  LoadPostsSuccess = '[Journal] Load Successful',
-  LoadPostsFailure = '[Journal] Load Failure'
+  LoadPosts = '[Journal] Load Multiple Posts Start',
+  LoadPostsSuccess = '[Journal] Load Multiple Posts Successful',
+  LoadPostsFailure = '[Journal] Load Multiple Posts Failure',
+  LoadSinglePost = '[Journal] Load Single Post Start',
+  LoadSinglePostSuccess = '[Journal] Load Single Post Successful',
+  LoadSinglePostFailure = '[Journal] Load Single Post Failure'
 }
 
 export class LoadPosts implements Action {
-  readonly type = JournalActionsType.LoadPosts;
+  public readonly type = JournalActionsType.LoadPosts;
 
   constructor(public payload: number) {}
 }
 
 export class LoadPostsSuccess implements Action {
-  readonly type = JournalActionsType.LoadPostsSuccess;
+  public readonly type = JournalActionsType.LoadPostsSuccess;
 
   constructor(public payload: PostDataWrapper) {}
 }
 
 export class LoadPostsFailure implements Action {
-  readonly type = JournalActionsType.LoadPostsFailure;
+  public readonly type = JournalActionsType.LoadPostsFailure;
 }
 
-export type JournalActions = LoadPosts | LoadPostsSuccess | LoadPostsFailure;
+export class LoadSinglePost implements Action {
+  public readonly type = JournalActionsType.LoadSinglePost;
+
+  constructor(public payload: string) {}
+}
+
+export class LoadSinglePostSuccess implements Action {
+  public readonly type = JournalActionsType.LoadSinglePostSuccess;
+  public readonly payload: PostData;
+
+  constructor(postData: PostData[]) {
+    this.payload = postData[0];
+  }
+}
+
+export class LoadSinglePostFailure implements Action {
+  readonly type = JournalActionsType.LoadSinglePostFailure;
+}
+
+export type JournalActions =
+  | LoadPosts
+  | LoadPostsSuccess
+  | LoadPostsFailure
+  | LoadSinglePost
+  | LoadSinglePostSuccess
+  | LoadSinglePostFailure;
