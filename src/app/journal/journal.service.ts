@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 
 import { ROOT_PATH } from '../variables';
-import { PostDataWrapper } from './model';
+import { PostData, PostDataWrapper } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,9 @@ export class JournalService {
     return this.http.get<PostDataWrapper>(
       `${this.rootPath}api/?posts&page=${page || 1}`
     );
+  }
+
+  public fetchPostBySlug(slug: string): Observable<PostData[]> {
+    return this.http.get<PostData[]>(`${this.rootPath}api/?posts&slug=${slug}`);
   }
 }
