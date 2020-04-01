@@ -3,7 +3,7 @@ import { PageObjectBase } from 'src/app/lib/testing/page-object.base';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IMock, It, Mock, Times } from 'typemoq';
 
-import { Component, Input } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
@@ -51,7 +51,8 @@ describe('Post List Component', () => {
         { provide: JournalFacade, useFactory: () => mockFacade.object },
         { provide: ActivatedRoute, useFactory: () => mockRoute.object }
       ],
-      imports: [SharedModule]
+      imports: [SharedModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PostListComponent);
@@ -71,9 +72,17 @@ describe('Post List Component', () => {
   it('should display posts', () => {
     const posts = pageObject.posts;
     mockPostData.posts.forEach((post, index) => {
-      const relatedPost = posts[index];
-      expect(relatedPost).toBeTruthy();
-      expect(relatedPost.dataset.post).toBe(`${post.postId}`);
+      const relatedPostElement = posts[index];
+      expect(relatedPostElement).toBeTruthy();
+      expect(relatedPostElement.dataset.post).toBe(`${post.postId}`);
+    });
+  });
+
+  it('should provide title link to posts', () => {
+    const posts = pageObject.posts;
+    mockPostData.posts.forEach((post, index) => {
+      const relatedPostElement = posts[index] as any;
+      expect(relatedPostElement.titleLink).toContain(post.postId);
     });
   });
 
