@@ -18,6 +18,18 @@ export function journalReducer(
       return { ...state, posts: action.payload, postsLoading: false };
     }
 
+    case JournalActionsType.LoadSinglePost: {
+      return { ...state, postsLoading: true };
+    }
+
+    case JournalActionsType.LoadSinglePostFailure: {
+      return { ...state, postsLoading: false };
+    }
+
+    case JournalActionsType.LoadSinglePostSuccess: {
+      return { ...state, currentPost: action.payload, postsLoading: false };
+    }
+
     default: {
       return state;
     }

@@ -1,6 +1,11 @@
 <article *ngIf="postData; else skeleton" class="post" data-post-loaded>
   <header class="header-area">
-    <h1 data-title>{{ postData.title }}</h1>
+    <h1 data-title>
+      <a *ngIf="titleLink" [routerLink]="titleLink" data-title-link>{{
+        postData.title
+      }}</a>
+      <ng-container *ngIf="!titleLink">{{ postData.title }}</ng-container>
+    </h1>
     <time
       [attr.datetime]="postData.date | unixEpoch | date: 'yyyy-MM-ddTHH:mmZ'"
       class="date"

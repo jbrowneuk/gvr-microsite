@@ -13,6 +13,11 @@ export const getPostList = createSelector(
   state => state.posts
 );
 
+export const getCurrentPost = createSelector(
+  getPartBrowserState,
+  state => state.currentPost
+);
+
 export const getPostListLoading = createSelector(
   getPartBrowserState,
   state => state.postsLoading

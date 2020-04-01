@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ROOT_PATH } from '../variables';
 import { JournalService } from './journal.service';
-import { PostDataWrapper } from './model';
+import { PostData, PostDataWrapper, PostStatus } from './model';
 
 const mockRootPath = '/test/gvr/';
 
@@ -45,5 +45,32 @@ describe('Journal Service', () => {
     );
     expect(req.request.method).toBe('GET');
     req.flush(mockPostData);
+  });
+
+  it('should fetch post by slug identifier', done => {
+    const expectedSlug = 'test-post';
+    const mockPost: PostData = {
+      postId: 1,
+      title: 'test post',
+      content: 'a test post',
+      slug: expectedSlug,
+      tags: ['test', 'post'],
+      date: 123456789,
+      modified: null,
+      status: PostStatus.Publish
+    };
+
+    service.fetchPostBySlug(expectedSlug).subscribe({
+      next: data => {
+        expect(data).toEqual([mockPost]);
+      },
+      complete: () => done()
+    });
+
+    const req = httpMock.expectOne(
+      `${mockRootPath}api/?posts&slug=${expectedSlug}`
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush([mockPost]);
   });
 });

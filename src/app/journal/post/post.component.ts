@@ -8,5 +8,6 @@ import { PostData } from '../model';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
-  @Input() postData: PostData;
+  @Input() public postData: PostData;
+  @Input() public titleLink: string;
 }

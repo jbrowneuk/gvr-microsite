@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LOCALE_ID } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PostData, PostStatus } from '../model';
 import { PostComponent } from './post.component';
@@ -28,7 +29,7 @@ describe('PostComponent', () => {
   beforeEach(async(async () => {
     await TestBed.configureTestingModule({
       declarations: [PostComponent],
-      imports: [HttpClientTestingModule, SharedModule]
+      imports: [HttpClientTestingModule, RouterTestingModule, SharedModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PostComponent);
@@ -84,11 +85,31 @@ describe('PostComponent', () => {
       expect(relatedElement.textContent.trim()).toContain(tag);
     });
   });
+
+  describe('title clicking behaviour', () => {
+    it('should not present a clickable title if title link property not provided', () => {
+      expect(pageObject.titleLink).toBeFalsy();
+      expect(pageObject.title.textContent.trim()).toBe(mockPostData.title);
+    });
+
+    it('should present a clickable title if title link property is provided', async(() => {
+      component.titleLink = '/anywhere';
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        expect(pageObject.titleLink).toBeTruthy();
+        expect(pageObject.title.textContent.trim()).toBe(mockPostData.title);
+      });
+    }));
+  });
 });
 
 class PostPageObject extends PageObjectBase<PostComponent> {
   public get title(): HTMLHeadingElement {
     return this.select('[data-title]');
+  }
+
+  public get titleLink(): HTMLAnchorElement {
+    return this.select('[data-title-link]');
   }
 
   public get dateContainer(): HTMLTimeElement {
