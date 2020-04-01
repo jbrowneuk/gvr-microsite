@@ -19,6 +19,10 @@ export class PostSingleComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  public get loading$(): Observable<boolean> {
+    return this.postFacade.postListLoading$;
+  }
+
   ngOnInit(): void {
     this.postData$ = this.route.params.pipe(
       switchMap(params => {

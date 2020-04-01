@@ -6,7 +6,7 @@
   <gvr-post
     *ngFor="let post of postData.posts | arraySort: 'date' | arrayReverse"
     [postData]="post"
-    [titleLink]="'../../post/' + post.postId"
+    [titleLink]="'../../post/' + post.slug"
     [attr.data-post]="post.postId"
   ></gvr-post>
 

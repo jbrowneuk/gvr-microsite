@@ -83,7 +83,7 @@ describe('Post List Component', () => {
     const posts = pageObject.posts;
     mockPostData.posts.forEach((post, index) => {
       const relatedPostElement = posts[index] as any;
-      expect(relatedPostElement.titleLink).toContain(post.postId);
+      expect(relatedPostElement.titleLink).toContain(post.slug);
     });
   });
 
