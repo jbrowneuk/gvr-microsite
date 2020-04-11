@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { JournalModule } from './journal/journal.module';
 import { LayoutComponent } from './layout/layout.component';
 import { PartBrowserModule } from './part-browser/part-browser.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ErrorComponent, LayoutComponent],
@@ -29,6 +30,7 @@ import { PartBrowserModule } from './part-browser/part-browser.module';
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
+    SharedModule,
     PartBrowserModule,
     JournalModule,
     AppRoutingModule

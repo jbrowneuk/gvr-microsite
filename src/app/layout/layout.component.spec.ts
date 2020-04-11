@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageObjectBase } from '../lib/testing/page-object.base';
@@ -14,7 +15,8 @@ describe('LayoutComponent', () => {
   beforeEach(async(async () => {
     await TestBed.configureTestingModule({
       declarations: [LayoutComponent],
-      providers: [{ provide: ROOT_PATH, useValue: testRoot }]
+      providers: [{ provide: ROOT_PATH, useValue: testRoot }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutComponent);
@@ -23,16 +25,17 @@ describe('LayoutComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should have image of layout', () => {
-    expect(pageObject.image).toBeTruthy();
-    expect(pageObject.image.src).toContain(
-      `${testRoot}assets/images/layout.png`
+  it('should have page content', () => {
+    console.log(pageObject.markdownContainer);
+    expect(pageObject.markdownContainer).toBeTruthy();
+    expect((pageObject.markdownContainer as any).path).toContain(
+      `${testRoot}pages/layout.md`
     );
   });
 });
 
 class LayoutComponentPageObject extends PageObjectBase<LayoutComponent> {
-  public get image(): HTMLImageElement {
-    return this.select('[data-image]');
+  public get markdownContainer(): HTMLElement {
+    return this.select('[data-page-content]');
   }
 }
