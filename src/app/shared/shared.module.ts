@@ -10,6 +10,7 @@ import { DataFilterPipe } from './data-filter.pipe';
 import { FormatKeyPipe } from './format-key.pipe';
 import { FormatValuePipe } from './format-value.pipe';
 import { FormattedTextComponent } from './formatted-text/formatted-text.component';
+import { MarkdownLoaderComponent } from './markdown-loader/markdown-loader.component';
 import { TableClassPipe } from './table-class.pipe';
 import { UnixEpochPipe } from './unix-epoch.pipe';
 
@@ -21,6 +22,7 @@ const sharedFeatures = [
   FormatKeyPipe,
   FormatValuePipe,
   FormattedTextComponent,
+  MarkdownLoaderComponent,
   TableClassPipe,
   UnixEpochPipe
 ];
