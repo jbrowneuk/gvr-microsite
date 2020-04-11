@@ -99,7 +99,7 @@ hr {
   color: var(--color-secondary-foreground);
 }
 
-img.responsive {
+.responsive {
   max-width: 100%;
   height: auto;
 }
