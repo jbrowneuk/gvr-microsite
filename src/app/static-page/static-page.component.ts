@@ -4,7 +4,7 @@ import { ROOT_PATH } from '../variables';
 
 @Component({
   selector: 'gvr-layout',
-  templateUrl: './layout.component.html'
+  templateUrl: './static-page.component.html'
 })
 export class LayoutComponent {
   public rootPath: string;

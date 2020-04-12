@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageObjectBase } from '../lib/testing/page-object.base';
 import { ROOT_PATH } from '../variables';
-import { LayoutComponent } from './layout.component';
+import { LayoutComponent } from './static-page.component';
 
 const testRoot = '/test/';
 
-describe('LayoutComponent', () => {
+describe('Static Page Component', () => {
   let component: LayoutComponent;
   let fixture: ComponentFixture<LayoutComponent>;
   let pageObject: LayoutComponentPageObject;
