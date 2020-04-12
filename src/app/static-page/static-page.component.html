@@ -1,4 +1,5 @@
 <gvr-markdown-loader
-  [path]="rootPath + 'pages/layout.md'"
+  *ngIf="markdownPath$ | async as markdownPath"
+  [path]="markdownPath"
   data-page-content
 ></gvr-markdown-loader>
