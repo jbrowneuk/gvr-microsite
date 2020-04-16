@@ -13,11 +13,17 @@ import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { JournalModule } from './journal/journal.module';
-import { LayoutComponent } from './layout/layout.component';
 import { PartBrowserModule } from './part-browser/part-browser.module';
+import { SharedModule } from './shared/shared.module';
+import { StaticPageComponent } from './static-page/static-page.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ErrorComponent, LayoutComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ErrorComponent,
+    StaticPageComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -29,6 +35,7 @@ import { PartBrowserModule } from './part-browser/part-browser.module';
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
+    SharedModule,
     PartBrowserModule,
     JournalModule,
     AppRoutingModule

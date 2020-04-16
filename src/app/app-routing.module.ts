@@ -3,12 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
-import { LayoutComponent } from './layout/layout.component';
+import { StaticPageComponent } from './static-page/static-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'layout', component: LayoutComponent },
+  {
+    path: 'layout',
+    component: StaticPageComponent,
+    data: { pageOverride: 'layout' }
+  },
+  { path: 'page/:page', component: StaticPageComponent },
   { path: '**', component: ErrorComponent }
 ];
 
