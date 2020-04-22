@@ -68,3 +68,17 @@ tbody tr:hover td:last-child::after {
   width: 50%;
   height: 15em;
 }
+
+.safari-caption-anchor {
+  position: relative;
+  padding-top: 3em;
+}
+
+.safari-caption-fix {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}

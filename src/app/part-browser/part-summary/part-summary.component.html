@@ -16,55 +16,57 @@
     running on the layout.
   </p>
 
-  <table class="table hoverable cost-summary">
-    <caption>
-      Parts summary
-      <span *ngIf="costsVisible">and estimated costs</span
-      ><br />
-      Last updated
-      <time data-last-updated [attr.datetime]="lastUpdated">
-        {{ lastUpdated | date }}
-      </time>
-    </caption>
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Items</th>
-        <th *ngIf="costsVisible" data-cost-header>Cost</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let category of costSummary.categories"
-        routerLink="/parts/{{ category.id }}"
-        [attr.data-summary-row]="category.id"
-      >
-        <td class="text">
-          <i
-            *ngIf="category.icon"
-            class="fad fa-fw fa-{{ category.icon }} category-icon"
-            aria-hidden="true"
-          ></i>
-          <a routerLink="/parts/{{ category.id }}" data-name>{{
-            category.name
-          }}</a>
-        </td>
-        <td data-item-count class="number">{{ category.items }}</td>
-        <td *ngIf="costsVisible" data-estimated-cost class="number">
-          {{ category.cost | currency }}
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr data-totals-row>
-        <th scope="row">Total</th>
-        <td data-item-count class="number">{{ costSummary.totalItems }}</td>
-        <td *ngIf="costsVisible" data-estimated-cost class="number">
-          {{ costSummary.totalCost | currency }}
-        </td>
-      </tr>
-    </tfoot>
-  </table>
+  <div class="safari-caption-anchor">
+    <table class="table hoverable cost-summary">
+      <caption class="safari-caption-fix">
+        Parts summary
+        <span *ngIf="costsVisible">and estimated costs</span
+        ><br />
+        Last updated
+        <time data-last-updated [attr.datetime]="lastUpdated">
+          {{ lastUpdated | date }}
+        </time>
+      </caption>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Items</th>
+          <th *ngIf="costsVisible" data-cost-header>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let category of costSummary.categories"
+          routerLink="/parts/{{ category.id }}"
+          [attr.data-summary-row]="category.id"
+        >
+          <td class="text">
+            <i
+              *ngIf="category.icon"
+              class="fad fa-fw fa-{{ category.icon }} category-icon"
+              aria-hidden="true"
+            ></i>
+            <a routerLink="/parts/{{ category.id }}" data-name>{{
+              category.name
+            }}</a>
+          </td>
+          <td data-item-count class="number">{{ category.items }}</td>
+          <td *ngIf="costsVisible" data-estimated-cost class="number">
+            {{ category.cost | currency }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr data-totals-row>
+          <th scope="row">Total</th>
+          <td data-item-count class="number">{{ costSummary.totalItems }}</td>
+          <td *ngIf="costsVisible" data-estimated-cost class="number">
+            {{ costSummary.totalCost | currency }}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 
   <h2>Estimated cost</h2>
   <p>
