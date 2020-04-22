@@ -47,6 +47,13 @@ tbody tr:hover td:last-child::after {
   opacity: 1;
 }
 
+@media screen and (max-width: 450px) {
+  tbody td:first-child::before,
+  tbody td:last-child::after {
+    display: none;
+  }
+}
+
 .shimmer.paragraph {
   height: 3em;
 }
@@ -60,4 +67,18 @@ tbody tr:hover td:last-child::after {
 .shimmer.cost-summary {
   width: 50%;
   height: 15em;
+}
+
+.safari-caption-anchor {
+  position: relative;
+  padding-top: 3em;
+}
+
+.safari-caption-fix {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
 }
