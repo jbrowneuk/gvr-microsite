@@ -47,6 +47,13 @@ tbody tr:hover td:last-child::after {
   opacity: 1;
 }
 
+@media screen and (max-width: 450px) {
+  tbody td:first-child::before,
+  tbody td:last-child::after {
+    display: none;
+  }
+}
+
 .shimmer.paragraph {
   height: 3em;
 }
