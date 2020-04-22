@@ -1,0 +1,44 @@
+<a routerLink="../parts" class="big-button">
+  <i class="fad fa-fw fa-chevron-left" aria-hidden="true"></i>
+  Return to parts summary
+</a>
+
+<h1>Collection summary</h1>
+<p>A look at the items that make up the Guelder Valley collection.</p>
+
+<h2>Locomotives</h2>
+<p *ngIf="locomotiveCategory$ | async as category">
+  There are {{ category.parts.length }} locomotives in the collection.
+</p>
+<div class="table-grid">
+  <ng-container *ngFor="let statTable of statTables">
+    <table
+      *ngIf="statTable[1] | async as tableData"
+      class="table"
+      [attr.data-table-title]="generateTableId(statTable[0])"
+    >
+      <caption>
+        {{
+          statTable[0]
+        }}
+      </caption>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of tableData"
+          [attr.data-row]="generateTableId('row-' + data[0])"
+        >
+          <td data-item-key class="text">
+            {{ data[0] }}
+          </td>
+          <td data-item-count class="number">{{ data[1] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>
