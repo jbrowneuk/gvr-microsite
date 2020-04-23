@@ -4,6 +4,7 @@ import { PartCategory, PartList } from 'src/app/model';
 import { IMock, Mock } from 'typemoq';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PartBrowserFacade } from '../state/part-browser.facade';
 import { PartStatisticsComponent } from './part-statistics.component';
@@ -84,6 +85,7 @@ describe('Part Statistics Component', () => {
 
     await TestBed.configureTestingModule({
       declarations: [PartStatisticsComponent],
+      imports: [RouterTestingModule],
       providers: [
         { provide: PartBrowserFacade, useFactory: () => mockFacade.object }
       ]

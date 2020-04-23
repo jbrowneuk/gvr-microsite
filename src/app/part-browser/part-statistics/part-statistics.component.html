@@ -3,12 +3,14 @@
   Return to parts summary
 </a>
 
-<h1>Collection summary</h1>
+<h1>Collection overview</h1>
 <p>A look at the items that make up the Guelder Valley collection.</p>
 
 <h2>Locomotives</h2>
 <p *ngIf="locomotiveCategory$ | async as category">
   There are {{ category.parts.length }} locomotives in the collection.
+  Information on each of the models can be found on the
+  <a routerLink="../parts/locomotives">locomotives part list</a>.
 </p>
 <div class="table-grid">
   <ng-container *ngFor="let statTable of statTables">

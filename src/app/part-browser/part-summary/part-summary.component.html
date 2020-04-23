@@ -1,19 +1,20 @@
 <ng-container
   *ngIf="costSummary$ | async as costSummary; else summaryLoadState"
 >
-  <h1>Parts list</h1>
+  <h1>Parts summary</h1>
   <p>
     The Guelder Valley layout is made out of {{ costSummary.totalItems }} parts
     that I’ve sorted into {{ costSummary.categories.length }} groups. Choose a
     group below to see photos and more details.
   </p>
-  <p class="tip">
-    <i class="icon fad fa-fw fa-info-square" aria-hidden="true"></i>
-    Alternatively, you can jump straight to the
-    <a routerLink="./locomotives">locomotives</a>,
-    <a routerLink="./coaches">coaches</a> or
-    <a routerLink="./wagons">wagons</a> sections for a summary of the trains
-    running on the layout.
+  <p>
+    You can jump straight to the <a routerLink="./locomotives">locomotives</a>,
+    <a routerLink="./coaches">coaches</a> or <a routerLink="./wagons">wagons</a>
+    sections for a summary of the rolling stock on the layout.
+  </p>
+  <p>
+    If you’re more interested in the composition of the collection, take a look
+    at <a routerLink="../statistics">this high-level overview</a>.
   </p>
 
   <div class="safari-caption-anchor">
