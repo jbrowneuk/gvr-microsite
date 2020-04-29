@@ -1,8 +1,9 @@
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { PartCategory } from 'src/app/model';
+import { ROOT_PATH } from 'src/app/variables';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 
 import { PartBrowserFacade } from '../state/part-browser.facade';
 
@@ -66,8 +67,14 @@ function depictedEraGenerator(category: PartCategory): PropSummary[] {
 export class PartStatisticsComponent implements OnInit {
   public readonly statTables: Array<[string, Observable<PropSummary[]>]>;
   public readonly locomotiveCategory$: Observable<PartCategory>;
+  public readonly rootPath: string;
 
-  constructor(private partFacade: PartBrowserFacade) {
+  constructor(
+    @Optional() @Inject(ROOT_PATH) rootPath: string,
+    private partFacade: PartBrowserFacade
+  ) {
+    this.rootPath = rootPath || '/';
+
     this.locomotiveCategory$ = this.partFacade.partList$.pipe(
       filter(p => !!p),
       map(l => l.categories.find(c => c.id === 'locomotives'))

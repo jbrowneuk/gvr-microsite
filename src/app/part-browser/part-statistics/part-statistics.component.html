@@ -3,10 +3,15 @@
   Return to parts summary
 </a>
 
-<h1>Collection overview</h1>
-<p>A look at the items that make up the Guelder Valley collection.</p>
+<gvr-markdown-loader
+  path="{{ rootPath }}pages/part-statistics.md"
+  data-page-overview
+></gvr-markdown-loader>
 
-<h2>Locomotives</h2>
+<h2>
+  <i aria-hidden="true" class="category-icon fad fa-fw fa-train"></i>
+  Locomotives
+</h2>
 <p *ngIf="locomotiveCategory$ | async as category">
   There are {{ category.parts.length }} locomotives in the collection.
   Information on each of the models can be found on the

@@ -3,6 +3,7 @@ import { PageObjectBase } from 'src/app/lib/testing/page-object.base';
 import { PartCategory, PartList } from 'src/app/model';
 import { IMock, Mock } from 'typemoq';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -88,7 +89,8 @@ describe('Part Statistics Component', () => {
       imports: [RouterTestingModule],
       providers: [
         { provide: PartBrowserFacade, useFactory: () => mockFacade.object }
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PartStatisticsComponent);
@@ -99,6 +101,10 @@ describe('Part Statistics Component', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a page summary', () => {
+    expect(pageObject.pageSummary).toBeTruthy();
   });
 
   it('should display locomotive type table', () => {
@@ -186,5 +192,9 @@ class PartStatisticsPageObject extends PageObjectBase<PartStatisticsComponent> {
     return this.selectAll(
       `${this.tableSelectors.era} [data-row=row-${key}] td`
     );
+  }
+
+  public get pageSummary(): HTMLElement {
+    return this.select('[data-page-overview]');
   }
 }
