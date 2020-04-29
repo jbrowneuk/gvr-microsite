@@ -124,8 +124,19 @@ hr {
 }
 
 .table th,
-.table td {
+.table td,
+.table .caption-row {
   padding: 0.5em 1em;
+}
+
+.table th,
+.table .caption-row {
+  font-weight: 500;
+}
+
+.table .caption-row {
+  border: 1px solid var(--color-container-border);
+  background: var(--color-table-row-background);
 }
 
 .table .number {
@@ -143,7 +154,7 @@ hr {
 
 .table.hoverable tbody tr:hover {
   background-color: var(--color-link-foreground);
-  color: var(--color-light-foreground);
+  color: var(--color-table-row-background);
 }
 
 .table.hoverable tbody tr:hover a {

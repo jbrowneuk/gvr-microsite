@@ -82,7 +82,7 @@ export class PartStatisticsComponent implements OnInit {
 
     this.statTables = [
       ['Type', this.locoType$],
-      ['Decade model manufactured', this.locoManufactureDecade$],
+      ['Model release date', this.locoManufactureDecade$],
       ['Depicted era of model', this.locoDepictedEra$],
       ['Wheel arrangement', this.locoWheelArrangement$]
     ];
