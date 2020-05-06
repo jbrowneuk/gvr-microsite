@@ -142,7 +142,7 @@ main {
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 380px) {
   #menu-toggle {
     display: flex;
   }
@@ -168,6 +168,16 @@ main {
   }
 
   #menu-container a.active {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: var(--color-default-background);
+    color: var(--color-default-foreground);
+  }
+
+  #menu-container a.active::before {
+    border-width: 16px;
+    top: calc(50% - 16px);
+    bottom: auto;
+    left: auto;
+    right: 0;
+    border-right-color: var(--color-default-foreground);
   }
 }
