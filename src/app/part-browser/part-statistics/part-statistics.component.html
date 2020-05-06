@@ -1,0 +1,45 @@
+<a routerLink="../parts" class="big-button">
+  <i class="fad fa-fw fa-chevron-left" aria-hidden="true"></i>
+  Return to parts summary
+</a>
+
+<gvr-markdown-loader
+  path="{{ rootPath }}pages/part-statistics.md"
+  data-page-overview
+></gvr-markdown-loader>
+
+<h2>
+  <i aria-hidden="true" class="category-icon fad fa-fw fa-train"></i>
+  Locomotives
+</h2>
+<p *ngIf="locomotiveCategory$ | async as category">
+  There are {{ category.parts.length }} locomotives in the collection.
+  Information on each of the models can be found on the
+  <a routerLink="../parts/locomotives">locomotives part list</a>.
+</p>
+<div class="table-grid">
+  <ng-container *ngFor="let statTable of statTables">
+    <table
+      *ngIf="statTable[1] | async as tableData"
+      class="table"
+      [attr.data-table-title]="generateTableId(statTable[0])"
+    >
+      <caption class="caption-row">
+        {{
+          statTable[0]
+        }}
+      </caption>
+      <tbody>
+        <tr
+          *ngFor="let data of tableData"
+          [attr.data-row]="generateTableId('row-' + data[0])"
+        >
+          <td data-item-key class="text">
+            {{ data[0] }}
+          </td>
+          <td data-item-count class="number">{{ data[1] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>
