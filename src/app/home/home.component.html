@@ -1,48 +1,60 @@
 <div
+  id="hero-container"
   class="backdrop"
   [ngStyle]="{
     'background-image': 'url(\'' + rootPath + 'assets/images/backdrop.jpg\')'
   }"
   data-backdrop
-></div>
-
-<div id="hero-container">
+>
   <div id="visual-container">
     <img
       id="logo"
       src="{{ rootPath }}assets/images/logo-full.png"
       alt="Guelder Valley"
     />
-    <div id="hero-foreground" class="rounded shadowed">
-      <p data-tagline>
-        A model railway I’ve been building for {{ ageLayout }} years.
-      </p>
-      <ul class="site-map">
-        <li>
-          <a routerLink="/layout">
-            <i
-              class="icon fad fa-fw fa-drafting-compass"
-              aria-hidden="true"
-            ></i>
-            Layout
-          </a>
-        </li>
-        <li>
-          <a routerLink="/parts">
-            <i
-              class="icon fad fa-fw fa-clipboard-list-check"
-              aria-hidden="true"
-            ></i>
-            Parts
-          </a>
-        </li>
-        <li>
-          <a routerLink="/journal">
-            <i class="icon fad fa-fw fa-newspaper" aria-hidden="true"></i>
-            Updates
-          </a>
-        </li>
-      </ul>
+    <div data-tagline>
+      A model railway I’ve been building for {{ ageLayout }} years.
     </div>
   </div>
+</div>
+
+<div id="visual-spacer"></div>
+
+<div class="site-map">
+  <a class="rounded" routerLink="/layout">
+    <span class="icon shadowed">
+      <i class="fad fa-fw fa-drafting-compass" aria-hidden="true"></i>
+    </span>
+    <span class="heading" role="heading">Layout</span>
+    <span class="button rounded shadowed" role="button">
+      Read more &raquo;
+    </span>
+    <span class="description">
+      An introduction to Guelder Valley, its models and the companies portrayed.
+    </span>
+  </a>
+  <a class="rounded" routerLink="/parts">
+    <span class="icon shadowed">
+      <i class="fad fa-fw fa-clipboard-list-check" aria-hidden="true"></i>
+    </span>
+    <span class="heading" role="heading">Parts</span>
+    <span class="button rounded shadowed" role="button">
+      Browse part list &raquo;
+    </span>
+    <span class="description">
+      Information on all of the components that make up the model railway.
+    </span>
+  </a>
+  <a class="rounded" routerLink="/journal">
+    <span class="icon shadowed">
+      <i class="fad fa-fw fa-newspaper" aria-hidden="true"></i>
+    </span>
+    <span class="heading" role="heading">Updates</span>
+    <span class="button rounded shadowed" role="button">
+      Latest updates &raquo;
+    </span>
+    <span class="description">
+      Updates on the layout, including news on the build and models.
+    </span>
+  </a>
 </div>
