@@ -107,8 +107,6 @@
 
 main {
   margin-top: calc(var(--toolbar-height) + var(--toolbar-margin-full));
-  position: relative;
-  z-index: 1;
 }
 
 #page-footer {
