@@ -1,52 +1,72 @@
+import { NgxMdModule } from 'ngx-md';
+import { PageObjectBase } from 'src/app/lib/testing/page-object.base';
+
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { FormattedTextComponent } from './formatted-text.component';
 
-const mockTestContent = 'Mock test content';
-
-@Component({
-  selector: 'ngx-md', // tslint:disable-line
-  template: '<ng-content></ng-content>'
-})
-class MockMarkdownComponent {}
+const mockTestContent = 'MockTestContent';
+const dataAttributes = {
+  noContent: 'data-no-content',
+  withContent: 'data-with-content',
+  markdown: 'data-text-area'
+};
 
 @Component({
   selector: 'gvr-test-wrapper',
   template: `
-    <gvr-formatted-text>${mockTestContent}</gvr-formatted-text>
+    <gvr-formatted-text ${dataAttributes.noContent}></gvr-formatted-text>
+    <gvr-formatted-text
+      ${dataAttributes.withContent}
+      [text]="text"
+    ></gvr-formatted-text>
   `
 })
-class TestComponent {}
+class TestComponent {
+  public text = mockTestContent;
+}
 
-describe('FormattedTextComponent', () => {
-  let component: TestComponent;
+class TestComponentPageObject extends PageObjectBase<TestComponent> {
+  public get noContent(): HTMLElement {
+    return this.select(`[${dataAttributes.noContent}]`);
+  }
+
+  public get withContent(): HTMLElement {
+    return this.select(`[${dataAttributes.withContent}]`);
+  }
+
+  public mdContainerFor(parent: HTMLElement): HTMLElement {
+    return parent.querySelector(`[${dataAttributes.markdown}]`);
+  }
+}
+
+describe('Formatted Text View', () => {
   let fixture: ComponentFixture<TestComponent>;
+  let pageObject: TestComponentPageObject;
 
   beforeEach(async(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        MockMarkdownComponent,
-        FormattedTextComponent,
-        TestComponent
-      ]
+      declarations: [FormattedTextComponent, TestComponent],
+      imports: [HttpClientTestingModule, NgxMdModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
+    pageObject = new TestComponentPageObject(fixture);
     fixture.detectChanges();
   }));
 
   it('should contain a markdown component', () => {
-    const mdElement = fixture.debugElement.query(By.css('gvr-formatted-text'));
-    expect(mdElement).toBeTruthy();
+    const noContentMd = pageObject.mdContainerFor(pageObject.noContent);
+    expect(noContentMd).toBeTruthy();
+
+    const contentMd = pageObject.mdContainerFor(pageObject.withContent);
+    expect(contentMd).toBeTruthy();
   });
 
   it('should pass data to markdown component', async(async () => {
-    const mdElement = fixture.debugElement.query(
-      By.css('gvr-formatted-text ngx-md')
-    );
-    expect(mdElement.nativeElement.innerHTML.trim()).toBe(mockTestContent);
+    const contentMd = pageObject.mdContainerFor(pageObject.withContent);
+    expect(contentMd.textContent.trim()).toBe(mockTestContent);
   }));
 });

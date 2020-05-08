@@ -19,9 +19,10 @@
       }}</span>
     </time>
   </header>
-  <gvr-formatted-text data-post-content>
-    {{ postData.content }}
-  </gvr-formatted-text>
+  <gvr-formatted-text
+    [text]="postData.content"
+    data-post-content
+  ></gvr-formatted-text>
   <footer>
     <ul *ngIf="postData.tags" class="tags secondary-text" data-post-tags>
       <li><i class="fad fa-fw fa-tags" aria-hidden="true"></i></li>

@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'gvr-formatted-text',
-  template: '<ngx-md><ng-content></ng-content></ngx-md>'
+  template: `
+    <ngx-md [data]="text" class="text-area" data-text-area></ngx-md>
+  `
 })
-export class FormattedTextComponent {}
+export class FormattedTextComponent {
+  @Input() public text = '';
+}
