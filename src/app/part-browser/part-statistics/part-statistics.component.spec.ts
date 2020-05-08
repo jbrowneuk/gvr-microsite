@@ -125,7 +125,7 @@ describe('Part Statistics Component', () => {
 
     // Get representation for data with an unknown type
     const unknownType = 'Unknown';
-    const unknownTypeKey = 'unknown';
+    const unknownTypeKey = unknownType.toLowerCase();
     const unknownTypeRow = pageObject.locoTypeRowForKey(unknownTypeKey);
     expect(unknownTypeRow[0].textContent.trim()).toBe(unknownType);
     expect(unknownTypeRow[1].textContent.trim()).toBe('1');
@@ -144,6 +144,30 @@ describe('Part Statistics Component', () => {
     expect(decadeRow[1].textContent.trim()).toBe('2');
   });
 
+  it('should display wheel arrangement table', () => {
+    const table = pageObject.wheelArrangementTable;
+    expect(table).toBeTruthy();
+
+    const rows = table.querySelectorAll('tbody tr');
+    expect(rows.length).toBe(mockLocoCategory.parts.length);
+
+    // Get representation for data with a known type
+    const knownTypeData = mockLocoCategory.parts[0].data;
+    const knownTypeKey = knownTypeData.wheelArrangement.toLowerCase();
+    const knownTypeRow = pageObject.wheelArrangementRowForKey(knownTypeKey);
+    expect(knownTypeRow[0].textContent.trim()).toBe(
+      knownTypeData.wheelArrangement
+    );
+    expect(knownTypeRow[1].textContent.trim()).toBe('1');
+
+    // Get representation for data with an unknown type
+    const unknownType = 'Unknown';
+    const unknownTypeKey = unknownType.toLowerCase();
+    const unknownTypeRow = pageObject.wheelArrangementRowForKey(unknownTypeKey);
+    expect(unknownTypeRow[0].textContent.trim()).toBe(unknownType);
+    expect(unknownTypeRow[1].textContent.trim()).toBe('1');
+  });
+
   it('should only display model data for locomotives', () => {
     const table = pageObject.eraTable;
     expect(table).toBeTruthy();
@@ -160,8 +184,9 @@ describe('Part Statistics Component', () => {
 class PartStatisticsPageObject extends PageObjectBase<PartStatisticsComponent> {
   readonly tableSelectors = {
     type: '[data-table-title=type]',
-    manufactureDecade: '[data-table-title=decade-model-manufactured]',
-    era: '[data-table-title=depicted-era-of-model]'
+    manufactureDecade: '[data-table-title=model-release-date]',
+    era: '[data-table-title=depicted-era-of-model]',
+    wheelArrangement: '[data-table-title=wheel-arrangement]'
   };
 
   public get locoTypeTable(): HTMLTableElement {
@@ -191,6 +216,16 @@ class PartStatisticsPageObject extends PageObjectBase<PartStatisticsComponent> {
   public eraForKey(key: string): HTMLTableDataCellElement[] {
     return this.selectAll(
       `${this.tableSelectors.era} [data-row=row-${key}] td`
+    );
+  }
+
+  public get wheelArrangementTable(): HTMLTableElement {
+    return this.select(this.tableSelectors.wheelArrangement);
+  }
+
+  public wheelArrangementRowForKey(key: string): HTMLTableDataCellElement[] {
+    return this.selectAll(
+      `${this.tableSelectors.wheelArrangement} [data-row=row-${key}] td`
     );
   }
 

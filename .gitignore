@@ -47,3 +47,7 @@ Thumbs.db
 
 # Manual third-party dependencies
 /src/assets/thirdparty
+
+# Site-specific assets
+/src/assets/images/parts
+/src/assets/images/thumbs

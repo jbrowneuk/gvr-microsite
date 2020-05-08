@@ -22,9 +22,9 @@
   <h2>Notes</h2>
   <gvr-formatted-text
     *ngIf="part.data && part.data.notes; else blankNotes"
+    [text]="part.data.notes"
     data-description
   >
-    {{ part.data.notes }}
   </gvr-formatted-text>
 
   <h2>Data</h2>
