@@ -2,6 +2,7 @@ import { Component, Inject, Optional } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { RouteTransitions } from './route-transitions';
+import { Themes, ThemeSwitcherService } from './services/theme-switcher.service';
 import { ROOT_PATH } from './variables';
 
 @Component({
@@ -13,7 +14,10 @@ import { ROOT_PATH } from './variables';
 export class AppComponent {
   public readonly rootPath: string;
 
-  constructor(@Optional() @Inject(ROOT_PATH) rootPath: string) {
+  constructor(
+    @Optional() @Inject(ROOT_PATH) rootPath: string,
+    private themeService: ThemeSwitcherService
+  ) {
     this.rootPath = rootPath || '/';
   }
 
@@ -23,5 +27,9 @@ export class AppComponent {
     }
 
     return outlet.activatedRoute.component.toString();
+  }
+
+  public toggleTheme(theme: Themes): void {
+    this.themeService.setTheme(theme);
   }
 }
